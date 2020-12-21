@@ -46,27 +46,31 @@ public class LinkedList<E> {
 
 	// 꼬리에 노드 삽입
 	public void addLast(E obj) {
-		if (head == null)							// 리스트가 비어 있으면 
+		if (head == null)	{						// 리스트가 비어 있으면 
 			addFirst(obj);							// 머리에 삽입
+		}
 		else {
 			Node<E> ptr = head;
-			while (ptr.next != null)
+			while (ptr.next != null)	{
 				ptr = ptr.next;
+			}
 			ptr.next = crnt = new Node<E>(obj, null);
 		}
 	}
 
 	// 머리 노드 삭제
 	public void removeFirst() {
-		if (head != null)							// 리스트가 비어 있지 않으면
+		if (head != null)	{							// 리스트가 비어 있지 않으면
 			head = crnt = head.next;
+		}
 	}
 
 	// 꼬리 노드  삭제
 	public void removeLast() {
 		if (head != null) {
-			if (head.next == null)					// 노드가 하나만 있으면
+			if (head.next == null)	{				// 노드가 하나만 있으면
 				removeFirst();						// 머리 노드를 삭제
+			}
 			else {
 				Node<E> ptr = head;					// 스캔 중인  노드
 				Node<E> pre = head;					// 스캔 중인  노드의 앞쪽 노드
@@ -84,8 +88,9 @@ public class LinkedList<E> {
 	// 노드 p를 삭제
 	public void remove(Node p) {
 		if (head != null) {
-			if (p == head)							// p가 머리 노드면
+			if (p == head)	{						// p가 머리 노드면
 				removeFirst();						// 머리 노드를 삭제
+			}
 			else {
 				Node<E> ptr = head;
 
@@ -106,23 +111,26 @@ public class LinkedList<E> {
 
 	// 모든 노드를 삭제
 	public void clear() {
-		while (head != null)						// 노드에 아무것도 없을 때까지
+		while (head != null)	{					// 노드에 아무것도 없을 때까지
 			removeFirst();							// 머리 노드를 삭제
+		}
 		crnt = null;
 	}
 
 	// 선택 노드를 하나 뒤쪽으로 이동
 	public boolean next() {
-		if (crnt == null || crnt.next == null)
+		if (crnt == null || crnt.next == null)	{
 			return false;							// 이동할 수 없음
+		}
 		crnt = crnt.next;
 		return true;
 	}
 
 	// 선택 노드를 출력
 	public void printCurrentNode() {
-		if (crnt == null)
+		if (crnt == null)	{
 			System.out.println("선택한 노드가 없습니다.");
+		}
 		else
 			System.out.println(crnt.data);
 	}
