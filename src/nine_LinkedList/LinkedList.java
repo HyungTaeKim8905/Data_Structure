@@ -1,7 +1,6 @@
 package nine_LinkedList;
 
 import java.util.Comparator;
-//연결 리스트 클래스
 
 public class LinkedList<E> {
 	// 노드
@@ -140,8 +139,11 @@ public class LinkedList<E> {
 		Node<E> ptr = head;
 
 		while (ptr != null) {
-			System.out.println(ptr.data);
+			System.out.print(ptr.data + " -> ");
 			ptr = ptr.next;
+			if(ptr == null) {
+				System.out.print(ptr);
+			}
 		}
 	}
 }
