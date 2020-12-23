@@ -15,6 +15,12 @@ public class LinkedListTester {
 			int data = scanner.nextInt();
 			linkedlist.addLast(data);
 		}
+		System.out.println("연결리스트 출력");
 		linkedlist.dump();
+		System.out.println();
+		System.out.print("검색할 데이터를 입력하세요(숫자) : ");
+		int data = scanner.nextInt();
+		System.out.println("검색한 데이터는 : " + linkedlist.search(data) + "입니다.");
+		
 	}
 }

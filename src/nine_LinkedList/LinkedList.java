@@ -23,44 +23,60 @@ public class LinkedList<E> {
 		head = crnt = null;
 	}
 
-	// 노드 검색
+	/*노드 검색
 	public E search(E obj, Comparator<? super E> c) {
-		Node<E> ptr = head;							// 현재 스캔중인  노드
+		Node<E> ptr = this.head;					// 현재 스캔중인  노드
 
 		while (ptr != null) {
 			if (c.compare(obj, ptr.data) == 0) {	// 검색 성공
-				crnt = ptr;
+				this.crnt = ptr;
 				return ptr.data;
 			}
 			ptr = ptr.next;							// 다음 노드를 선택
 		}
 		return null;								// 검색 실패
 	}
+	*/
+	
+	// 노드 검색
+	public E search(E obj)	{
+		Node<E> ptr = head;
+		
+		while(ptr != null) {
+			if(obj == ptr.data) {
+				this.crnt = ptr;
+				return ptr.data;
+			}
+			ptr = ptr.next;
+		}
+		return null;
+	}
 
 	// 머리에 노드 삽입
 	public void addFirst(E obj) {
 		Node<E> ptr = head;							// 삽입 전의 머리 노드
-		head = crnt = new Node<E>(obj, ptr);
+		this.head = this.crnt = new Node<E>(obj, ptr);
 	}
 
 	// 꼬리에 노드 삽입
 	public void addLast(E obj) {
-		if (head == null)	{						// 리스트가 비어 있으면 
+		if (this.head == null)	{					// 리스트가 비어 있으면 
 			addFirst(obj);							// 머리에 삽입
 		}
 		else {
 			Node<E> ptr = head;
+			//System.out.println("현재 head가 가리키고 있는 노드의 주소값 : " + ptr);
 			while (ptr.next != null)	{
 				ptr = ptr.next;
 			}
-			ptr.next = crnt = new Node<E>(obj, null);
+			ptr.next = this.crnt = new Node<E>(obj, null);
 		}
 	}
 
 	// 머리 노드 삭제
 	public void removeFirst() {
-		if (head != null)	{							// 리스트가 비어 있지 않으면
-			head = crnt = head.next;
+		if (head != null)	{						// 리스트가 비어 있지 않으면
+			this.head = this.crnt = this.head.next;
 		}
 	}
 
@@ -79,19 +95,19 @@ public class LinkedList<E> {
 					ptr = ptr.next;
 				}
 				pre.next = null;					// pre는 삭제 후의 꼬리 노드
-				crnt = pre;
+				this.crnt = pre;
 			}
 		}
 	}
 
 	// 노드 p를 삭제
 	public void remove(Node p) {
-		if (head != null) {
-			if (p == head)	{						// p가 머리 노드면
+		if (this.head != null) {
+			if (p == this.head)	{					// p가 머리 노드면
 				removeFirst();						// 머리 노드를 삭제
 			}
 			else {
-				Node<E> ptr = head;
+				Node<E> ptr = this.head;
 
 				while (ptr.next != p) {
 					ptr = ptr.next;
