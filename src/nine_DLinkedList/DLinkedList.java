@@ -14,7 +14,10 @@ public class DLinkedList<E> {
 		Node()	{
 			data = null;
 			prev = next = this;
+			System.out.println(this.prev);
+			System.out.println(this.next);
 		}
+		
 		//생성자
 		Node(E obj, Node<E> prev, Node<E> next) {
 			this.data = obj;
@@ -92,7 +95,7 @@ public class DLinkedList<E> {
 		Node<E> ptr = this.head.prev;
 		
 		while(ptr != head) {
-			System.out.println(ptr.data);
+			System.out.println(ptr.data + " -> ");
 			ptr = ptr.prev;
 		}
 	}
@@ -121,8 +124,8 @@ public class DLinkedList<E> {
 	
 	// 선택 노드의 바로 뒤에 노드를 삽입
 	public void add(E obj) {
-		Node<E> node = new Node<E>(obj, crnt, crnt.next);
-		crnt.next = crnt.next.prev = node;
+		Node<E> node = new Node<E>(obj, this.crnt, this.crnt.next);
+		this.crnt.next = this.crnt.next.prev = node;
 		crnt = node;
 	}
 
@@ -144,7 +147,9 @@ public class DLinkedList<E> {
 			crnt.prev.next = crnt.next;
 			crnt.next.prev = crnt.prev;
 			crnt = crnt.prev;
-			if (crnt == head) crnt = head.next;
+			if (crnt == head) {
+				crnt = head.next;
+			}
 		}
 	}
 
