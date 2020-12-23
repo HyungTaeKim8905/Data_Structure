@@ -1,7 +1,5 @@
 package nine_DLinkedList;
 
-import java.util.Comparator;
-
 public class DLinkedList<E> {
 	private Node<E> head;				//머리노드 (더미 노드)
 	private Node<E> crnt;				//선택노드
@@ -40,7 +38,7 @@ public class DLinkedList<E> {
 		}
 	}
 	
-	//노드 검색
+	/* 노드 검색
 	public E search(E obj, Comparator<? super E> c) {
 		Node<E> ptr = head.next;
 		
@@ -52,6 +50,21 @@ public class DLinkedList<E> {
 			ptr = ptr.next;					//다음 노드로 선택
 		}
 		return null;						//검색 실패(원하는 데이터 없음)
+	}
+	*/
+	
+	// 노드 검색
+	public E search(E obj) {
+		Node<E> ptr = head;
+		
+		while (ptr != head) {
+			if (obj == ptr.data) {
+				this.crnt = ptr;
+				return ptr.data;
+			}
+			ptr = ptr.next;
+		}
+		return null;
 	}
 	
 	//선택한 노드를 출력
