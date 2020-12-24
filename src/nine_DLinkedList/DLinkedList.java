@@ -58,7 +58,7 @@ public class DLinkedList<E> {
 	
 	// 노드 검색
 	public E search(E obj) {
-		Node<E> ptr = head;
+		Node<E> ptr = head.next;
 		
 		while (ptr != head) {
 			if (obj == ptr.data) {
@@ -85,7 +85,7 @@ public class DLinkedList<E> {
 		Node<E> ptr = head.next;		//더미 노드의 다음 노드
 		
 		while(ptr != head) {
-			System.out.println(ptr.data + " -> ");
+			System.out.print(ptr.data + " -> ");
 			ptr = ptr.next;
 		}
 	}
@@ -95,7 +95,7 @@ public class DLinkedList<E> {
 		Node<E> ptr = this.head.prev;
 		
 		while(ptr != head) {
-			System.out.println(ptr.data + " -> ");
+			System.out.print(ptr.data + " -> ");
 			ptr = ptr.prev;
 		}
 	}
@@ -131,24 +131,24 @@ public class DLinkedList<E> {
 
 	// 머리에 노드를 삽입 
 	public void addFirst(E obj) {
-		crnt = head;				// 더미 노드 head의 바로 뒤에 삽입
+		this.crnt = this.head;				// 더미 노드 head의 바로 뒤에 삽입
 		add(obj);
 	}
 
 	// 꼬리에 노드를 삽입
 	public void addLast(E obj) {
-		crnt = head.prev;			// 꼬리 노드 head.prev의 바로 뒤에 삽입
+		this.crnt = this.head.prev;			// 꼬리 노드 head.prev의 바로 뒤에 삽입
 		add(obj);
 	}
 
 	// 선택 노드를 삭제
 	public void removeCurrentNode() {
 		if (!isEmpty()) {
-			crnt.prev.next = crnt.next;
-			crnt.next.prev = crnt.prev;
-			crnt = crnt.prev;
-			if (crnt == head) {
-				crnt = head.next;
+			this.crnt.prev.next = this.crnt.next;
+			this.crnt.next.prev = this.crnt.prev;
+			this.crnt = this.crnt.prev;
+			if (this.crnt == this.head) {
+				this.crnt = this.head.next;
 			}
 		}
 	}
@@ -158,8 +158,8 @@ public class DLinkedList<E> {
 		Node<E> ptr = head.next;
 
 		while (ptr != head) {
-			if (ptr == p) {			// p를 찾음
-				crnt = p;
+			if (ptr == p) {					// p를 찾음
+				this.crnt = p;
 				removeCurrentNode();
 				break;
 			}
@@ -169,19 +169,22 @@ public class DLinkedList<E> {
 
 	// 머리 노드를 삭제
 	public void removeFirst() {
-		crnt = head.next;			// 머리 노드 head.next를 삭제
+		this.crnt = this.head.next;			// 머리 노드 head.next를 삭제
 		removeCurrentNode();
 	}
 
 	// 꼬리 노드를 삭제
 	public void removeLast() {
-		crnt = head.prev;			// 꼬리 노드 head.prev를 삭제
+		this.crnt = this.head.prev;			// 꼬리 노드 head.prev를 삭제
 		removeCurrentNode();
 	}
 
 	// 모든 노드를 삭제
 	public void clear() {
-		while (!isEmpty())			// 텅 빌 때까지
-			removeFirst();			// 머리 노드를 삭제
+		while (!isEmpty())	{				// 텅 빌 때까지
+			removeFirst();					// 머리 노드를 삭제
+		}
 	}
+	
+	
 }

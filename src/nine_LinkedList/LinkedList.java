@@ -1,5 +1,4 @@
 package nine_LinkedList;
-
 import java.util.Comparator;
 
 public class LinkedList<E> {
@@ -100,28 +99,43 @@ public class LinkedList<E> {
 		}
 	}
 
-	// 노드 p를 삭제
+	// 선택한 노드 p를 삭제
 	public void remove(Node p) {
-		if (this.head != null) {
-			if (p == this.head)	{					// p가 머리 노드면
-				removeFirst();						// 머리 노드를 삭제
+		if(this.head != null) {
+			if(this.head == p)	{
+				removeFirst();
 			}
 			else {
 				Node<E> ptr = this.head;
-
-				while (ptr.next != p) {
+				while(ptr.next != p) {
 					ptr = ptr.next;
-					if (ptr == null) return;		// p가 리스트에 없습니다.  
+					if(ptr == null)	{
+						return;
+					}
 				}
 				ptr.next = p.next;
-				crnt = ptr;
+				this.crnt = ptr;
 			}
 		}
 	}
 
 	// 선택 노드를 삭제
-	public void removeCurrentNode() {
-		remove(crnt);
+	/*
+	public void removeCurrentNode()	{
+		remove(this.crnt);
+	}
+	*/
+	
+	//선택 노드를 삭제
+	public void removeCurrentNode(E obj)	{
+		Node<E> ptr = this.head;
+		if(ptr != null) {
+			while(ptr.data != obj) {
+				ptr = ptr.next;
+			}
+			this.crnt = ptr;
+			remove(this.crnt);
+		}
 	}
 
 	// 모든 노드를 삭제
