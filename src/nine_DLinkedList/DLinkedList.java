@@ -14,8 +14,6 @@ public class DLinkedList<E> {
 		Node()	{
 			data = null;
 			prev = next = this;
-			System.out.println(this.prev);
-			System.out.println(this.next);
 		}
 		
 		//»ý¼ºÀÚ
