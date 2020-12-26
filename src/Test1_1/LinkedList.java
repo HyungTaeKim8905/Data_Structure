@@ -81,18 +81,18 @@ public class LinkedList<E> {
 			else {
 				Node<E> ptr = this.head;
 				while(ptr.data != obj) {
-					if(ptr.data == obj) {
-						this.crnt = ptr;
-						remove(this.crnt);
-					}
 					ptr = ptr.next;
+				}
+				if(ptr.data == obj) {
+					this.crnt = ptr;
+					remove(this.crnt);
 				}
 			}
 		}
 	}
 	
 	// 선택한 노드 p를 삭제
-	public void remove(Node<E> p) {
+	public void remove(Node p) {
 		if(this.head != null) {
 			if(this.head == p) {
 				removeFirst();

@@ -31,7 +31,11 @@ public class LinkedListTester {
 		linkedlist.removeLast();
 		linkedlist.dump();
 		
-		
+		System.out.println();
+		System.out.print("선택한 노드를 삭제 : ");
+		int result1 = scanner.nextInt();
+		linkedlist.removeCurrendNode(result1);
+		linkedlist.dump();
 		scanner.close();
 		
 	}

@@ -2,60 +2,43 @@ package nine_LinkedList;
 
 import java.util.Scanner;
 
+import Test1_1.LinkedList;
+
 public class LinkedListTester {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		LinkedList<Integer> linkedlist = new LinkedList<Integer>();
-		LinkedList<Integer>.Node<Integer> node = null;
-		//linkedlist.new Node<Integer>(100, null);
-		while(true) {
-			System.out.println("(0) 머리에 노드 삽입 | (1) 꼬리에 노드 삽입 | (2) 머리 노드 삭제");
-			System.out.println("(3) 꼬리 노드 삭제   | (4) 선택 노드 삭제 |  (5) 모든 노드 삭제");
-			System.out.println("(6) 선택 노드 출력   | (7) 모든 노드 출력 |  (8) 노드 검색");
-			int num = scanner.nextInt();
-			int data = 0;
-			if(num == 0)	{
-				System.out.print("머리 노드에 삽입할 데이터를 입력하세요(숫자)  : ");
-				data = scanner.nextInt();
-				linkedlist.addFirst(data);
-			}
-			if(num == 1)	{
-				System.out.print("꼬리 노드에 삽입할 데이터를 입력하세요(숫자)  : ");
-				data = scanner.nextInt();
-				linkedlist.addLast(data);
-			}
-			if(num == 2)	{
-				System.out.print("머리 노드를 삭제합니다.");
-				linkedlist.removeFirst();
-			}
-			if(num == 3)	{
-				System.out.print("머리 노드를 삭제합니다.");
-				linkedlist.removeFirst();
-			}
-			if(num == 4)	{
-				System.out.print("꼬리 노드를 삭제합니다.");
-				linkedlist.removeLast();
-			}
-			if(num == 5)	{
-				System.out.print("선택 노드의 데이터를 입력해주세요(숫자) : ");
-				data = scanner.nextInt();
-				linkedlist.removeCurrentNode(data);
-			}
-			if(num == 6)	{
-				System.out.print("선택 노드의 데이터를 입력해주세요(숫자) : ");
-				data = scanner.nextInt();
-				linkedlist.removeCurrentNode(data);
-			}
-			if(num == 7)	{
-				System.out.print("선택 노드의 데이터를 입력해주세요(숫자) : ");
-				data = scanner.nextInt();
-				linkedlist.removeCurrentNode(data);
-			}
-			if(num == 8)	{
-				System.out.print("선택 노드의 데이터를 입력해주세요(숫자) : ");
-				data = scanner.nextInt();
-				linkedlist.removeCurrentNode(data);
-			}
+		System.out.print("몇개의 데이터를 저정하시겠습니까? : ");
+		int num = scanner.nextInt();
+		for(int i = 1; i <= num; i++) {
+			System.out.print("저장할 데이터를 입력하세요(숫자) : ");
+			int data = scanner.nextInt();
+			linkedlist.addLast(data);
 		}
+		System.out.println("연결리스트 출력");
+		linkedlist.dump();
+		
+		System.out.println();
+		System.out.print("검색할 데이터를 입력하세요(숫자) : ");
+		int data = scanner.nextInt();
+		System.out.println("검색한 데이터는 : " + linkedlist.search(data) + " 입니다.");
+		
+		System.out.println();
+		System.out.println("머리 노드 삭제");
+		linkedlist.removeFirst();
+		linkedlist.dump();
+		
+		System.out.println();
+		System.out.println("꼬리 노드 삭제");
+		linkedlist.removeLast();
+		linkedlist.dump();
+		
+		System.out.println();
+		System.out.print("선택한 노드를 삭제 : ");
+		int result1 = scanner.nextInt();
+		linkedlist.removeCurrendNode(result1);
+		linkedlist.dump();
+		scanner.close();
+		
 	}
 }
