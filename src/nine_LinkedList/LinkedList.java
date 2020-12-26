@@ -1,5 +1,4 @@
 package nine_LinkedList;
-import java.util.Comparator;
 
 public class LinkedList<E> {
 	// ³ëµå
@@ -68,7 +67,7 @@ public class LinkedList<E> {
 			while (ptr.next != null)	{
 				ptr = ptr.next;
 			}
-			ptr.next = this.crnt = new Node<E>(obj, null);
+			ptr.next = new Node<E>(obj, null);
 		}
 	}
 
