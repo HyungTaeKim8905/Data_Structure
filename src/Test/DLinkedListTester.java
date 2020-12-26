@@ -15,14 +15,14 @@ public class DLinkedListTester {
 			Dlinkedlist.addLast(data);
 		}
 		System.out.println("이중 원형 연결리스트 출력");
-		Dlinkedlist.dump();
+		//Dlinkedlist.dump();
 		System.out.println();
 		System.out.println("이중 원형 연결리스트 거꾸로 출력");
-		Dlinkedlist.dumpReverse();
+		//Dlinkedlist.dumpReverse();
 		System.out.println();
 		System.out.println("머리노드 하나 삭제");
 		Dlinkedlist.removeFirst();
-		Dlinkedlist.dump();
+		//Dlinkedlist.dump();
 		scanner.close();
 	}
 }

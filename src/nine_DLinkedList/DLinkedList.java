@@ -144,8 +144,8 @@ public class DLinkedList<E> {
 		if (!isEmpty()) {
 			this.crnt.prev.next = this.crnt.next;
 			this.crnt.next.prev = this.crnt.prev;
-			this.crnt = this.crnt.prev;
-			if (this.crnt == this.head) {
+			this.crnt = this.crnt.prev;		//질문
+			if (this.crnt == this.head) { 	//질문
 				this.crnt = this.head.next;
 			}
 		}
