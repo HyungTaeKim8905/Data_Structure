@@ -1,49 +1,49 @@
 package nine_Stack;
 
 public class IntStack {
-	private int max;		//ìŠ¤íƒ ìš©ëŸ‰	:: ìŠ¤íƒì— ìŒ“ì„ ìˆ˜ ìˆëŠ” ìµœëŒ€ ë°ì´í„° ìˆ˜
-	private int ptr;		//ìŠ¤íƒ í¬ì¸í„°	:: ìŠ¤íƒì— ìŒ“ì—¬ ìˆëŠ” ë°ì´í„° ê°œìˆ˜
-	private int stk[];		//ìŠ¤íƒ ë³¸ì²´	:: ìŠ¤íƒ ë³¸ì²´ë¥¼ ì°¸ì¡°í•˜ëŠ” ë°°ì—´ ë³€ìˆ˜
+	private int max;		//½ºÅÃ ¿ë·®	:: ½ºÅÃ¿¡ ½×À» ¼ö ÀÖ´Â ÃÖ´ë µ¥ÀÌÅÍ ¼ö
+	private int ptr;		//½ºÅÃ Æ÷ÀÎÅÍ	:: ½ºÅÃ¿¡ ½×¿© ÀÖ´Â µ¥ÀÌÅÍ °³¼ö
+	private int stk[];		//½ºÅÃ º»Ã¼	:: ½ºÅÃ º»Ã¼¸¦ ÂüÁ¶ÇÏ´Â ¹è¿­ º¯¼ö
 	
-	//ì‹¤í–‰ ì‹œ ì˜ˆì™¸ : ìŠ¤íƒì´ ë¹„ì–´ìˆìŒ
+	//½ÇÇà ½Ã ¿¹¿Ü : ½ºÅÃÀÌ ºñ¾îÀÖÀ½
 	public class EmptyIntStackException extends RuntimeException {
 		public EmptyIntStackException() { };
 	}
 	
-	//ì‹¤í–‰ ì‹œ ì˜ˆì™¸ : ìŠ¤íƒì´ ê°€ë“ ì°¸
+	//½ÇÇà ½Ã ¿¹¿Ü : ½ºÅÃÀÌ °¡µæ Âü
 	public class OverflowIntStackException extends RuntimeException {
 		public OverflowIntStackException() { };
 	}
 	
-	//ìƒì„±ì
+	//»ı¼ºÀÚ
 	public IntStack(int capacity) {
 		this.ptr = 0;
 		this.max = capacity;
 		try	{
-			this.stk = new int[this.max];		//ìŠ¤íƒ ë³¸ì²´ìš© ë°°ì—´ì„ ìƒì„±
+			this.stk = new int[this.max];		//½ºÅÃ º»Ã¼¿ë ¹è¿­À» »ı¼º
 		} catch(OutOfMemoryError e)	{
-			this.max = 0;						//ìƒì„±í•  ìˆ˜ ì—†ìŒ
+			this.max = 0;						//»ı¼ºÇÒ ¼ö ¾øÀ½
 			System.out.println("ERROR : " + e.getMessage());
 		}
 	}
 	
-	//ìŠ¤íƒì— xë¥¼ í‘¸ì‹œ
+	//½ºÅÃ¿¡ x¸¦ Çª½Ã
 	public int push(int x) throws OverflowIntStackException	{
-		if(this.ptr >= this.max) {					//ìŠ¤íƒì´ ê°€ë“ ì°¬ ê²½ìš° ì˜ˆì™¸ ë°œìƒ
+		if(this.ptr >= this.max) {					//½ºÅÃÀÌ °¡µæ Âù °æ¿ì ¿¹¿Ü ¹ß»ı
 			throw new OverflowIntStackException();
 		}
 		return this.stk[this.ptr++] = x;
 	}
 	
-	//ìŠ¤íƒì—ì„œ ë°ì´í„°ë¥¼ íŒ(ì •ìƒì— ìˆëŠ” ë°ì´í„°ë¥¼ êº¼ëƒ„)
+	//½ºÅÃ¿¡¼­ µ¥ÀÌÅÍ¸¦ ÆË(Á¤»ó¿¡ ÀÖ´Â µ¥ÀÌÅÍ¸¦ ²¨³¿)
 	public int pop() throws EmptyIntStackException	{
-		if(this.ptr < 0) {						//ìŠ¤íƒì´ ë¹„ì–´ìˆë‹¤ë©´
+		if(this.ptr < 0) {						//½ºÅÃÀÌ ºñ¾îÀÖ´Ù¸é
 			throw new EmptyIntStackException();
 		}
 		return this.stk[--this.ptr];
 	}
 	
-	//ìŠ¤íƒì—ì„œ ë°ì´í„°ë¥¼ í”¼í¬(ì •ìƒì— ìˆëŠ” ë°ì´í„°ë¥¼ ë“¤ì—¬ë‹¤ë´„)
+	//½ºÅÃ¿¡¼­ µ¥ÀÌÅÍ¸¦ ÇÇÅ©(Á¤»ó¿¡ ÀÖ´Â µ¥ÀÌÅÍ¸¦ µé¿©´Ùº½)
 	public int peek() throws EmptyIntStackException {
 		if(this.ptr < 0) {
 			throw new EmptyIntStackException();
@@ -51,9 +51,9 @@ public class IntStack {
 		return this.stk[this.ptr - 1];
 	}
 	
-	//ìŠ¤íƒì—ì„œ xë¥¼ ì°¾ì•„ ì¸ë±ìŠ¤(ì—†ìœ¼ë©´ -1)ë¥¼ ë°˜í™˜
+	//½ºÅÃ¿¡¼­ x¸¦ Ã£¾Æ ÀÎµ¦½º(¾øÀ¸¸é -1)¸¦ ¹İÈ¯
 	public int indexOf(int x) {
-		for (int i = this.ptr - 1; i >= 0; i--) {		//ì •ìƒìª½ì—ì„œ ì„ í˜• ê²€ìƒ‰
+		for (int i = this.ptr - 1; i >= 0; i--) {		//Á¤»óÂÊ¿¡¼­ ¼±Çü °Ë»ö
 			if(this.stk[i] == x) {
 				return i;
 			}
@@ -61,35 +61,35 @@ public class IntStack {
 		return -1;
 	}
 	
-	//ìŠ¤íƒì„ ë¹„ì›€
+	//½ºÅÃÀ» ºñ¿ò
 	public void clear()	{
 		this.ptr = 0;
 	}
 	
-	//ìŠ¤íƒì˜ ìš©ëŸ‰ì„ ë°˜í™˜
+	//½ºÅÃÀÇ ¿ë·®À» ¹İÈ¯
 	public int capacity() {
 		return this.max;
 	}
 	
-	//ìŠ¤íƒì— ìŒ“ì—¬ ìˆëŠ” ë°ì´í„° ìˆ˜ë¥¼ ë°˜í™˜
+	//½ºÅÃ¿¡ ½×¿© ÀÖ´Â µ¥ÀÌÅÍ ¼ö¸¦ ¹İÈ¯
 	public int size() {
 		return this.ptr;
 	}
 	
-	//ìŠ¤íƒì´ ë¹„ì–´ìˆëŠ”ì§€ í™•ì¸
+	//½ºÅÃÀÌ ºñ¾îÀÖ´ÂÁö È®ÀÎ
 	public boolean isEmpty() {
 		return this.ptr <= 0;
 	}
 	
-	//ìŠ¤íƒì´ ê°€ë“ ì°¾ëŠ”ì§€ í™•ì¸
+	//½ºÅÃÀÌ °¡µæ Ã£´ÂÁö È®ÀÎ
 	public boolean isFull()	{
 		return this.ptr >= this.max;
 	}
 	
-	//ìŠ¤íƒ ì•ˆì˜ ëª¨ë“  ë°ì´í„°ë¥¼ ë°”ë‹¥ -> ê¼­ëŒ€ê¸° ìˆœì„œë¡œ ì¶œë ¥
+	//½ºÅÃ ¾ÈÀÇ ¸ğµç µ¥ÀÌÅÍ¸¦ ¹Ù´Ú -> ²À´ë±â ¼ø¼­·Î Ãâ·Â
 	public void dump() {
 		if(this.ptr <= 0) {
-			System.out.println("ìŠ¤íƒì´ ë¹„ì–´ìˆìŠµë‹ˆë‹¤.");
+			System.out.println("½ºÅÃÀÌ ºñ¾îÀÖ½À´Ï´Ù.");
 		}
 		else {
 			for(int i = 0; i < this.ptr; i++) {
