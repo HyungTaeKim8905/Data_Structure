@@ -32,6 +32,7 @@ public class IntStack {
 		if(this.ptr >= this.max) {					//스택이 가득 찬 경우 예외 발생
 			throw new OverflowIntStackException();
 		}
+		//ptr에 x를 저장 후 ptr을 +1 증가 시킨다.
 		return this.stk[this.ptr++] = x;
 	}
 	
@@ -40,16 +41,17 @@ public class IntStack {
 		if(this.ptr < 0) {						//스택이 비어있다면
 			throw new EmptyIntStackException();
 		}
-		return this.stk[--this.ptr];
-	}
+		//ptr을 먼저 감소 시킨 후 리턴
+		return this.stk[--this.ptr]; //10 ->9 ptr == 9
+	}	// this.stk[9] 실질적으로 멤버변수 ptr이 바뀜
 	
 	//스택에서 데이터를 피크(정상에 있는 데이터를 들여다봄)
 	public int peek() throws EmptyIntStackException {
 		if(this.ptr < 0) {
 			throw new EmptyIntStackException();
 		}
-		return this.stk[this.ptr - 1];
-	}
+		return this.stk[this.ptr - 1]; //10 -1 ->9 ptr==10;
+	}	// this.stk[9] ptr을 가져다 쓰는것 그래서 ptr에는 변화가 없음
 	
 	//스택에서 x를 찾아 인덱스(없으면 -1)를 반환
 	public int indexOf(int x) {
