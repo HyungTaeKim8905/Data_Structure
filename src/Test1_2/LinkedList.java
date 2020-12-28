@@ -113,9 +113,6 @@ public class LinkedList<E> {
 		Node<E> ptr = this.head;
 		while(ptr != null) {
 			System.out.print(ptr.data + " -> ");
-			if(ptr == null) {
-				System.out.println(ptr);
-			}
 			ptr = ptr.next;
 		}
 	}
