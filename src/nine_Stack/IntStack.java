@@ -41,7 +41,7 @@ public class IntStack {
 		if(this.ptr < 0) {						//스택이 비어있다면
 			throw new EmptyIntStackException();
 		}
-		//ptr을 먼저 감소 시킨 후 리턴
+		//ptr을 먼저 감소 시킨 후 리턴 
 		return this.stk[--this.ptr]; //10 ->9 ptr == 9
 	}	// this.stk[9] 실질적으로 멤버변수 ptr이 바뀜
 	
