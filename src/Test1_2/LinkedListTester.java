@@ -31,12 +31,13 @@ public class LinkedListTester {
 		linkedlist.removeLast();
 		linkedlist.dump();
 		
+		
 		System.out.println();
-		System.out.print("선택한 노드를 삭제 : ");
+		System.out.print("삭제하고자 하는 데이터를 입력해주세요(숫자) : ");
 		int result1 = scanner.nextInt();
 		linkedlist.removeCurrendNode(result1);
 		linkedlist.dump();
 		scanner.close();
-		
+		 
 	}
 }

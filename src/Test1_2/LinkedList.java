@@ -15,25 +15,25 @@ public class LinkedList<E> {
 		}
 	}
 	
-	//검색 메서드
-	public E search(E obj) {	//20
+	//검색
+	public E search(E obj) {
 		Node<E> ptr = this.head;
-		while(ptr.data != obj) {
+		while(ptr != null) {
+			if(ptr.data == obj) {
+				return ptr.data;
+			}
 			ptr = ptr.next;
-		}
-		if(ptr.data == obj) {
-			return ptr.data;
 		}
 		return null;
 	}
 	
-	//머리에 노드 추가 함수
+	//머리에 노드 추가
 	public void addFirst(E obj) {
 		Node<E> ptr = this.head;
 		this.head = this.crnt = new Node<E>(obj, ptr);
 	}
 	
-	//꼬리에 노드 추가 함수
+	//꼬리에 노드 추가
 	public void addLast(E obj) {
 		if(this.head == null) {
 			addFirst(obj);
@@ -44,10 +44,10 @@ public class LinkedList<E> {
 				ptr = ptr.next;
 			}
 			ptr.next = new Node<E>(obj, null);
-		}
+ 		}
 	}
 	
-	//원하는 노드 삭제
+	//선택한 노드 삭제
 	public void removeCurrendNode(E obj) {
 		if(this.head != null) {
 			if(this.head.next == null) {
@@ -66,13 +66,14 @@ public class LinkedList<E> {
 		}
 	}
 	
-	//노드 p 삭제
+	//node의 p 삭제		p가 crnt랑 가리키는 노드가 같음 예를들어 20을 가리킴
 	public void remove(Node p) {
 		if(this.head != null) {
 			if(this.head == p) {
 				removeFirst();
 			}
 			else {
+				
 				Node<E> ptr = this.head;
 				while(ptr.next != p) {
 					ptr = ptr.next;
@@ -90,7 +91,7 @@ public class LinkedList<E> {
 		this.head = this.head.next;
 	}
 	
-	//꼬리 노드 삭제
+	//꼬리 노드 삭제	
 	public void removeLast() {
 		if(this.head != null) {
 			if(this.head.next == null) {
@@ -108,12 +109,20 @@ public class LinkedList<E> {
 		}
 	}
 	
-	//모든 노드 출력
+	
+	
+	
+	
+	
+	//출력
 	public void dump() {
 		Node<E> ptr = this.head;
 		while(ptr != null) {
 			System.out.print(ptr.data + " -> ");
 			ptr = ptr.next;
+			if(ptr == null) {
+				System.out.println(ptr);
+			}
 		}
 	}
 }

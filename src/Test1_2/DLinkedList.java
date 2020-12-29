@@ -1,5 +1,5 @@
 package Test1_2;
-
+//이중 원형 연결 리스트
 public class DLinkedList<E> {
 	
 	private Node<E> head;
@@ -22,12 +22,12 @@ public class DLinkedList<E> {
 		}
 	}
 	
-	//더미 노드 생성
+	//더미 노드 생성(삽입 삭제 검색을 수월하게 하기 위해)
 	public DLinkedList() {
 		this.head = this.crnt = new Node<E>();
 	}
 	
-	//리스트가 비어있는지 확인
+	//비어 있는지 검색
 	public boolean isEmpty() {
 		if(this.head == this.head.next) {
 			return true;
@@ -36,7 +36,8 @@ public class DLinkedList<E> {
 			return false;
 		}
 	}
-	//검색 노드
+	
+	//검색
 	public E search(E obj) {
 		Node<E> ptr = this.head.next;
 		while(ptr != this.head) {
@@ -52,7 +53,6 @@ public class DLinkedList<E> {
 	public void add(E obj) {
 		Node<E> node = new Node<E>(obj, this.crnt, this.crnt.next);
 		this.crnt.next = this.crnt.next.prev = node;
-		//this.crnt = node;
 	}
 	
 	//머리에 노드 추가
@@ -63,11 +63,11 @@ public class DLinkedList<E> {
 	
 	//꼬리에 노드 추가
 	public void addLast(E obj) {
-		this.crnt =this.head.prev;
+		this.crnt = this.head.prev;
 		add(obj);
 	}
 	
-	//노드 삭제
+	//선택한 노드 삭제
 	public void removeCurrentNode() {
 		if(!isEmpty()) {
 			this.crnt.prev.next = this.crnt.next;
@@ -75,18 +75,15 @@ public class DLinkedList<E> {
 		}
 	}
 	
-	//노드 p 삭제
+	//node p 삭제
 	public void remove(Node p) {
-		if(this.head.next == p) {
-			removeFirst();
-		}
-		else {
-			Node<E> ptr =this.head.next;
+		Node<E> ptr =this.head.next;
+		if(!isEmpty()) {
 			while(ptr != this.head) {
 				if(ptr == p) {
-					ptr.prev.next = ptr.next;
-					ptr.next.prev = ptr.prev;
-					return;
+					this.crnt = ptr;
+					removeCurrentNode();
+					break;
 				}
 				ptr = ptr.next;
 			}
@@ -96,6 +93,7 @@ public class DLinkedList<E> {
 	//머리 노드 삭제
 	public void removeFirst() {
 		this.crnt = this.head.next;
+		removeCurrentNode();
 	}
 	
 	//꼬리 노드 삭제
@@ -103,7 +101,6 @@ public class DLinkedList<E> {
 		this.crnt = this.head.prev;
 		removeCurrentNode();
 	}
-	
 	//모든 노드 삭제
 	public void clear() {
 		if(!isEmpty()) {
@@ -112,6 +109,8 @@ public class DLinkedList<E> {
 	}
 	
 	
+
+	//모든 노드를 출력
 	public void dump()	{
 		Node<E> ptr = head.next;		//더미 노드의 다음 노드
 		
@@ -130,4 +129,5 @@ public class DLinkedList<E> {
 			ptr = ptr.prev;
 		}
 	}
+	
 }
