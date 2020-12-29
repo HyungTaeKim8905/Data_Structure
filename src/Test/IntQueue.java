@@ -1,4 +1,4 @@
-package nine_Queue;
+package Test;
 
 public class IntQueue {
 	private int max;		//큐의 용량
@@ -22,17 +22,18 @@ public class IntQueue {
 		this.num = this.front = this.rear = 0;
 		this.max = capacity;
 		try {
+			
 			this.que = new int[this.max];
-		}
-		catch(OutOfMemoryError e) {
+			
+		} catch(OutOfMemoryError e) {
 			this.max = 0;
+			System.out.println("ERROR : " + e.getMessage());
 		}
 	}
 	
 	//큐에 데이터를 인큐
 	public int enque(int x) throws OverflowIntQueueException {
 		if(this.num >= this.max) {
-			System.out.println("큐가 꽉 차있습니다.");
 			throw new OverflowIntQueueException();
 		}
 		this.que[this.rear++] = x;
@@ -46,12 +47,11 @@ public class IntQueue {
 	//큐에서 데이터를 디큐
 	public int deque() throws EmptyIntQueueException {
 		if(this.num <= 0) {
-			System.out.println("큐에 데이터가 저장되어 있지 않습니다.");
 			throw new EmptyIntQueueException();
 		}
 		int x = this.que[this.front++];
 		this.num--;
-		if (this.front == this.max) {
+		if(this.front == this.max) {
 			this.front = 0;
 		}
 		return x;
@@ -62,14 +62,14 @@ public class IntQueue {
 		if(this.num <= 0) {
 			throw new EmptyIntQueueException();
 		}
-		return que[this.front];
+		return this.que[this.front];
 	}
 	
-	/ /큐에서 x를 검색하여 인덱스(찾지 못하면 -1)를 반환
+	//큐에서 x를 검색하여 인덱스(찾지 못하면 -1)를 반환
 	public int indexOf(int x) {
-		for(int i = 0; i < num; i++) {
+		for(int i = 0; i < this.num; i++) {
 			int idx = (i + this.front) % this.max;
-			if(this.que[idx] == x) {				//검색 성공
+			if(this.que[idx] == x) {
 				return idx;
 			}
 		}

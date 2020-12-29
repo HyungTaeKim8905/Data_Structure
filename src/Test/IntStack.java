@@ -7,62 +7,61 @@ public class IntStack {
 	
 	//실행 시 예외 : 스택이 비어있음
 	public class EmptyIntStackException extends RuntimeException {
-		public EmptyIntStackException() { };
+		public EmptyIntStackException() {}
 	}
 	
-	//실행 시 예외 : 스택이 가득 참
+	//실행 시 예외 : 스택이 꽉차있음
 	public class OverflowIntStackException extends RuntimeException {
-		public OverflowIntStackException() { };
+		public OverflowIntStackException() {}
 	}
 	
 	//생성자
 	public IntStack(int capacity) {
 		this.ptr = 0;
 		this.max = capacity;
-		try	{
-			this.stk = new int[this.max];		//스택 본체용 배열을 생성
-		} catch(OutOfMemoryError e)	{
-			this.max = 0;						//생성할 수 없음
+		try {
+			this.stk = new int[this.max];
+		} catch(OutOfMemoryError e) {
+			this.max = 0;
+			System.out.println("생성자 OutOfMemoryError 에러 발생");
 			System.out.println("ERROR : " + e.getMessage());
 		}
 	}
 	
 	//스택에 x를 푸시
-	public int push(int x) throws OverflowIntStackException	{
-		if(this.ptr >= this.max) {					//스택이 가득 찬 경우 예외 발생
+	public int push(int x) throws OverflowIntStackException {
+		if(this.ptr >= this.max) {
 			throw new OverflowIntStackException();
 		}
-		//ptr에 x를 저장 후 ptr을 +1 증가 시킨다.
+		//ptr에 x를 저장 후 ptr을 +1 함
 		return this.stk[this.ptr++] = x;
 	}
 	
-	//스택에서 데이터를 팝(정상에 있는 데이터를 꺼냄)
-	public int pop() throws EmptyIntStackException	{
-		if(this.ptr < 0) {						//스택이 비어있다면
+	//스택에서 데이터를 팜(정상에 있는 데이터를 꺼냄)
+	public int pop() throws EmptyIntStackException {
+		if(this.ptr < 0) {
 			throw new EmptyIntStackException();
 		}
-		//ptr을 먼저 감소 시킨 후 리턴 
-		return this.stk[--this.ptr]; //10 ->9 ptr == 9
-	}	// this.stk[9] 실질적으로 멤버변수 ptr이 바뀜
+		return this.stk[--this.ptr];
+	}
 	
 	//스택에서 데이터를 피크(정상에 있는 데이터를 들여다봄)
 	public int peek() throws EmptyIntStackException {
 		if(this.ptr < 0) {
 			throw new EmptyIntStackException();
 		}
-		return this.stk[this.ptr - 1]; //10 -1 ->9 ptr==10;
-	}	// this.stk[9] ptr을 가져다 쓰는것 그래서 ptr에는 변화가 없음
+		return this.stk[this.ptr - 1];
+	}
 	
 	//스택에서 x를 찾아 인덱스(없으면 -1)를 반환
 	public int indexOf(int x) {
-		for (int i = this.ptr - 1; i >= 0; i--) {		//정상쪽에서 선형 검색
+		for(int i = this.ptr - 1; i >= 0; i--) {
 			if(this.stk[i] == x) {
 				return i;
 			}
 		}
 		return -1;
 	}
-	
 	//스택을 비움
 	public void clear()	{
 		this.ptr = 0;
@@ -99,5 +98,4 @@ public class IntStack {
 			}
 		}
 	}
-
 }
