@@ -65,7 +65,7 @@ public class IntQueue {
 		return que[this.front];
 	}
 	
-	/ /큐에서 x를 검색하여 인덱스(찾지 못하면 -1)를 반환
+	//큐에서 x를 검색하여 인덱스(찾지 못하면 -1)를 반환
 	public int indexOf(int x) {
 		for(int i = 0; i < num; i++) {
 			int idx = (i + this.front) % this.max;

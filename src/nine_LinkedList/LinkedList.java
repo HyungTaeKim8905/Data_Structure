@@ -1,47 +1,34 @@
 package nine_LinkedList;
 
-public class LinkedList<E> {
-	// ³ëµå
-	class Node<E> {
-		private E data;			// µ¥ÀÌÅÍ
-		private Node<E> next;	// µÚÂÊ Æ÷ÀÎÅÍ(´ÙÀ½ ³ëµå ÂüÁ¶)
+import java.util.Comparator;
 
-		// »ı¼ºÀÚ
+// ì—°ê²° ë¦¬ìŠ¤íŠ¸ í´ë˜ìŠ¤
+public class LinkedList<E> {
+	private Node<E> head;		// ë¨¸ë¦¬ ë…¸ë“œ
+	private Node<E> crnt;		// í˜„ì¬ ì„ íƒí•œ ë…¸ë“œë¥¼ ê°€ë¦¬í‚¨ë‹¤. ê²€ìƒ‰ê³¼ ì‚­ì œ ìš©ë„
+	
+	class Node<E> {
+		private E data;			// data í•„ë“œ
+		private Node<E> next;	// ë‹¤ìŒ ë…¸ë“œë¥¼ ì°¸ì¡°í•˜ëŠ” next í•„ë“œ
+		
+		// ìƒì„±ìë¥¼ í˜¸ì¶œí•˜ë©´ ë…¸ë“œ í•˜ë‚˜ê°€ ë§Œë“¤ì–´ì§„ë‹¤.
 		Node(E data, Node<E> next) {
 			this.data = data;
 			this.next = next;
 		}
 	}
-
-	private Node<E> head;		// ¸Ó¸® ³ëµå
-	private Node<E> crnt;		// ¼±ÅÃ ³ëµå
-
-	// »ı¼ºÀÚ
-	public LinkedList() {
-		head = crnt = null;
-	}
-
-	/*³ëµå °Ë»ö
-	public E search(E obj, Comparator<? super E> c) {
-		Node<E> ptr = this.head;					// ÇöÀç ½ºÄµÁßÀÎ  ³ëµå
-
-		while (ptr != null) {
-			if (c.compare(obj, ptr.data) == 0) {	// °Ë»ö ¼º°ø
-				this.crnt = ptr;
-				return ptr.data;
-			}
-			ptr = ptr.next;							// ´ÙÀ½ ³ëµå¸¦ ¼±ÅÃ
-		}
-		return null;								// °Ë»ö ½ÇÆĞ
-	}
-	*/
 	
-	// ³ëµå °Ë»ö
-	public E search(E obj)	{
-		Node<E> ptr = head;
+	// ìƒì„±ìë¥¼ í˜¸ì¶œí•˜ë©´ ë¹„ì–´ìˆëŠ” ì—°ê²° ë¦¬ìŠ¤íŠ¸ê°€ ìƒì„±ì´ ëœë‹¤.
+	public LinkedList() {
+		this.head = this.crnt = null;
+	}
+	
+	// ê²€ìƒ‰
+	public E search(E data, Comparator<? super E> c) {
+		Node<E> ptr = this.head;
 		
 		while(ptr != null) {
-			if(obj == ptr.data) {
+			if(c.compare(data, ptr.data) == 0) {
 				this.crnt = ptr;
 				return ptr.data;
 			}
@@ -49,130 +36,107 @@ public class LinkedList<E> {
 		}
 		return null;
 	}
-
-	// ¸Ó¸®¿¡ ³ëµå »ğÀÔ
-	public void addFirst(E obj) {
-		Node<E> ptr = head;							// »ğÀÔ ÀüÀÇ ¸Ó¸® ³ëµå
-		this.head = this.crnt = new Node<E>(obj, ptr);
+	
+	// ë¨¸ë¦¬ì— ë…¸ë“œ ì‚½ì…
+	public void addFirst(E data) {
+		Node<E> ptr = this.head;
+		this.head = this.crnt = new Node<E>(data, ptr);
 	}
-
-	// ²¿¸®¿¡ ³ëµå »ğÀÔ
-	public void addLast(E obj) {
-		if (this.head == null)	{					// ¸®½ºÆ®°¡ ºñ¾î ÀÖÀ¸¸é 
-			addFirst(obj);							// ¸Ó¸®¿¡ »ğÀÔ
+	
+	// ê¼¬ë¦¬ì— ë…¸ë“œ ì‚½ì…
+	public void addLast(E data) {
+		if(this.head == null) {
+			addFirst(data);
 		}
 		else {
-			Node<E> ptr = head;
-			//System.out.println("ÇöÀç head°¡ °¡¸®Å°°í ÀÖ´Â ³ëµåÀÇ ÁÖ¼Ò°ª : " + ptr);
-			while (ptr.next != null)	{
+			Node<E> ptr = this.head;
+			while(ptr.next != null) {
 				ptr = ptr.next;
 			}
-			ptr.next = new Node<E>(obj, null);
+			ptr.next = this.crnt = new Node<E>(data, null);
 		}
 	}
-
-	// ¸Ó¸® ³ëµå »èÁ¦
+	
+	// ë¨¸ë¦¬ ë…¸ë“œë¥¼ ì‚­ì œ
 	public void removeFirst() {
-		if (head != null)	{						// ¸®½ºÆ®°¡ ºñ¾î ÀÖÁö ¾ÊÀ¸¸é
+		if(this.head != null) {	// ë¦¬ìŠ¤íŠ¸ê°€ ë¹„ì–´ìˆì§€ ì•Šë‹¤ë©´
 			this.head = this.crnt = this.head.next;
 		}
 	}
-
-	// ²¿¸® ³ëµå  »èÁ¦
+	
+	// ê¼¬ë¦¬ ë…¸ë“œë¥¼ ì‚­ì œ
 	public void removeLast() {
-		if (head != null) {
-			if (head.next == null)	{				// ³ëµå°¡ ÇÏ³ª¸¸ ÀÖÀ¸¸é
-				removeFirst();						// ¸Ó¸® ³ëµå¸¦ »èÁ¦
+		if(this.head != null) {
+			if(this.head.next == null) {
+				removeFirst();
 			}
 			else {
-				Node<E> ptr = head;					// ½ºÄµ ÁßÀÎ  ³ëµå
-				Node<E> pre = head;					// ½ºÄµ ÁßÀÎ  ³ëµåÀÇ ¾ÕÂÊ ³ëµå
-
-				while (ptr.next != null) {
+				Node<E> ptr = this.head;	// ìŠ¤ìº” ì¤‘ì¸ ë…¸ë“œ
+				Node<E> pre = this.head;	// ìŠ¤ìº” ì¤‘ì¸ ë…¸ë“œì˜ ì•ìª½ ë…¸ë“œ
+				
+				while(ptr.next != null) {
 					pre = ptr;
 					ptr = ptr.next;
 				}
-				pre.next = null;					// pre´Â »èÁ¦ ÈÄÀÇ ²¿¸® ³ëµå
+				pre.next = null;
 				this.crnt = pre;
 			}
 		}
 	}
-
-	// ¼±ÅÃÇÑ ³ëµå p¸¦ »èÁ¦
+	
+	// ì„ íƒí•œ ë…¸ë“œ pë¥¼ ì‚­ì œ
 	public void remove(Node p) {
 		if(this.head != null) {
-			if(this.head == p)	{
-				removeFirst();
+			if(this.head == p) {	// pê°€ ë¨¸ë¦¬ë…¸ë“œë©´
+				this.head = null;
 			}
 			else {
 				Node<E> ptr = this.head;
-				while(ptr.next != p) {
+				
+				while(ptr.next != null) {
 					ptr = ptr.next;
-					if(ptr == null)	{
-						return;
+					if(ptr == null) {
+						return;	// pê°€ ë¦¬ìŠ¤íŠ¸ì— ì—†ë‹¤.
 					}
 				}
+				
 				ptr.next = p.next;
 				this.crnt = ptr;
 			}
 		}
 	}
-
-	// ¼±ÅÃ ³ëµå¸¦ »èÁ¦
-	/*
-	public void removeCurrentNode()	{
+	
+	// ì„ íƒí•œ ë…¸ë“œë¥¼ ì‚­ì œ
+	public void removeCurrentNode() {
 		remove(this.crnt);
 	}
-	*/
 	
-	//¼±ÅÃ ³ëµå¸¦ »èÁ¦
-	public void removeCurrentNode(E obj)	{
-		Node<E> ptr = this.head;
-		if(ptr != null) {
-			while(ptr.data != obj) {
-				ptr = ptr.next;
-			}
-			this.crnt = ptr;
-			remove(this.crnt);
-		}
-	}
-
-	// ¸ğµç ³ëµå¸¦ »èÁ¦
+	// ëª¨ë“  ë…¸ë“œ ì‚­ì œ
 	public void clear() {
-		while (head != null)	{					// ³ëµå¿¡ ¾Æ¹«°Íµµ ¾øÀ» ¶§±îÁö
-			removeFirst();							// ¸Ó¸® ³ëµå¸¦ »èÁ¦
+		while(this.head != null) {
+			removeFirst();
 		}
-		crnt = null;
+		this.crnt =null;
 	}
-
-	// ¼±ÅÃ ³ëµå¸¦ ÇÏ³ª µÚÂÊÀ¸·Î ÀÌµ¿
-	public boolean next() {
-		if (crnt == null || crnt.next == null)	{
-			return false;							// ÀÌµ¿ÇÒ ¼ö ¾øÀ½
-		}
-		crnt = crnt.next;
-		return true;
-	}
-
-	// ¼±ÅÃ ³ëµå¸¦ Ãâ·Â
+	
+	// ì„ íƒí•œ ë…¸ë“œë¥¼ ì¶œë ¥
 	public void printCurrentNode() {
-		if (crnt == null)	{
-			System.out.println("¼±ÅÃÇÑ ³ëµå°¡ ¾ø½À´Ï´Ù.");
+		if(this.crnt == null) {
+			System.out.println("ì„ íƒí•œ ë…¸ë“œê°€ ì—†ìŠµë‹ˆë‹¤.");
 		}
-		else
-			System.out.println(crnt.data);
+		else {
+			System.out.println(this.crnt.data);
+		}
 	}
-
-	// ¸ğµç ³ëµå¸¦ Ãâ·Â
+	
+	// ëª¨ë“  ë…¸ë“œë¥¼ ì¶œë ¥
 	public void dump() {
-		Node<E> ptr = head;
-
-		while (ptr != null) {
-			System.out.print(ptr.data + " -> ");
+		Node<E> ptr = this.head;
+		
+		while(ptr != null) {
+			System.out.println(ptr.data);
 			ptr = ptr.next;
-			if(ptr == null) {
-				System.out.print(ptr);
-			}
 		}
 	}
+	
 }
