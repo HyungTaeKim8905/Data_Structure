@@ -1,65 +1,46 @@
 package nine_DLinkedList;
 
+import java.util.Comparator;
+
 public class DLinkedList<E> {
-	private Node<E> head;				//¸Ó¸®³ëµå (´õ¹Ì ³ëµå)
-	private Node<E> crnt;				//¼±ÅÃ³ëµå
-	
-	// ³ëµå
+	private Node<E> head; // ë¨¸ë¦¬ë…¸ë“œ
+	private Node<E> crnt;
+
+	// ë…¸ë“œ
 	class Node<E> {
-		private E data;					//µ¥ÀÌÅÍ
-		private Node<E> prev;			//¾ÕÂÊ Æ÷ÀÎÅÍ(¾ÕÂÊ ³ëµå¿¡ ´ëÇÑ ÂüÁ¶)
-		private Node<E> next;			//µÚÂÊ Æ÷ÀÎÅÍ(µÚÂÊ ³ëµå¿¡ ´ëÇÑ ÂüÁ¶)
-		
-		//»ı¼ºÀÚ
-		Node()	{
-			data = null;
-			prev = next = this;
+		private E data; // ë°ì´í„°
+		private Node<E> prev; // ì•ìª½ í¬ì¸í„° (ì•ìª½ ë…¸ë“œì— ëŒ€í•œ ì°¸ì¡°)
+		private Node<E> next; // ë’¤ìª½ í¬ì¸í„° (ë’¤ìª½ ë…¸ë“œì— ëŒ€í•œ ì°¸ì¡°)
+
+		// ìƒì„±ì
+		public Node() {
+			this.data = null;
+			this.prev = this.next = this;
 		}
-		
-		//»ı¼ºÀÚ
-		Node(E obj, Node<E> prev, Node<E> next) {
-			this.data = obj;
+
+		// ìƒì„±ì
+		Node(E data, Node<E> prev, Node<E> next) {
+			this.data = data;
 			this.prev = prev;
 			this.next = next;
 		}
 	}
-	
-	//»ı¼ºÀÚ
-	public DLinkedList()	{
-		head = crnt = new Node<E>();
+
+	// ìƒì„±ì
+	public DLinkedList() {
+		this.head = this.crnt = null;
 	}
-	
-	//¸®½ºÆ®°¡ ºñ¾îÀÖ´ÂÁö È®ÀÎ
-	public boolean isEmpty()	{
-		if(head.next == head) {
-			return true;
-		}
-		else	{
-			return false;
-		}
+
+	// ë¦¬ìŠ¤íŠ¸ê°€ ë¹„ì–´ìˆëŠ”ì§€ í™•ì¸ í•˜ëŠ” ë©”ì„œë“œ
+	public boolean isEmpty() {
+		return this.head.next == this.head;
 	}
-	
-	/* ³ëµå °Ë»ö
-	public E search(E obj, Comparator<? super E> c) {
-		Node<E> ptr = head.next;
-		
-		while(ptr != head) {
-			if(c.compare(obj, ptr.data) == 0)	{
-				this.crnt = ptr;
-				return ptr.data;			//°Ë»ö ¼º°ø
-			}
-			ptr = ptr.next;					//´ÙÀ½ ³ëµå·Î ¼±ÅÃ
-		}
-		return null;						//°Ë»ö ½ÇÆĞ(¿øÇÏ´Â µ¥ÀÌÅÍ ¾øÀ½)
-	}
-	*/
-	
-	// ³ëµå °Ë»ö
-	public E search(E obj) {
-		Node<E> ptr = head.next;
-		
-		while (ptr != head) {
-			if (obj == ptr.data) {
+
+	// ë…¸ë“œë¥¼ ê²€ìƒ‰í•˜ëŠ” ë©”ì„œë“œ
+	public E search(E data, Comparator<? super E> c) {
+		Node<E> ptr = this.head.next;
+		while (ptr != this.head) {
+			if (c.compare(ptr.data, data) == 0) {
 				this.crnt = ptr;
 				return ptr.data;
 			}
@@ -67,96 +48,79 @@ public class DLinkedList<E> {
 		}
 		return null;
 	}
-	
-	//¼±ÅÃÇÑ ³ëµå¸¦ Ãâ·Â
-	public void printCurrentNode()	{
-		if(isEmpty()) {
-			System.out.println("¼±ÅÃÇÑ ³ëµå°¡ ¾ø½À´Ï´Ù.");
-		}
-		else	{
+
+	// ì„ íƒ ë…¸ë“œë¥¼ ì¶œë ¥
+	public void printCurrentNode() {
+		if (isEmpty()) {
+			System.out.println("ì„ íƒí•œ ë…¸ë“œê°€ ì—†ìŠµë‹ˆë‹¤.");
+		} else {
 			System.out.println(this.crnt.data);
 		}
 	}
-	
-	//¸ğµç ³ëµå¸¦ Ãâ·Â
-	public void dump()	{
-		Node<E> ptr = head.next;		//´õ¹Ì ³ëµåÀÇ ´ÙÀ½ ³ëµå
-		
-		while(ptr != head) {
+
+	// ëª¨ë“  ë…¸ë“œë¥¼ ì¶œë ¥
+	public void dump() {
+		Node<E> ptr = this.head.next;
+
+		while (ptr != this.head) {
 			System.out.print(ptr.data + " -> ");
 			ptr = ptr.next;
 		}
 	}
-	
-	//¸ğµç ³ëµå¸¦ °Å²Ù·Î Ãâ·Â
-	public void dumpReverse()	{
+
+	// ëª¨ë“  ë…¸ë“œë¥¼ ê±°ê¾¸ë¡œ ì¶œë ¥
+	public void dumpReverse() {
 		Node<E> ptr = this.head.prev;
-		
-		while(ptr != head) {
+
+		while (ptr != this.head) {
 			System.out.print(ptr.data + " -> ");
 			ptr = ptr.prev;
 		}
 	}
-	
-	//¼±ÅÃ ³ëµå¸¦ ÇÏ³ª µÚÂÊÀ¸·Î ÀÌµ¿
-	public boolean next()	{
-		if(isEmpty() || this.crnt.next == head) {
-			return false;
-		}
-		else	{
-			this.crnt = this.crnt.next;
-			return true;
-		}
-	}
-	
-	//¼±ÅÃ ³ëµå¸¦ ÇÏ³ª ¾ÕÂÊÀ¸·Î ÀÌµ¿
-	public boolean prev()	{
-		if(isEmpty() || this.crnt.prev == head) {
-			return false;
-		}
-		else	{
-			this.crnt = this.crnt.prev;
-			return true;
-		}
-	}
-	
-	// ¼±ÅÃ ³ëµåÀÇ ¹Ù·Î µÚ¿¡ ³ëµå¸¦ »ğÀÔ
-	public void add(E obj) {
-		Node<E> node = new Node<E>(obj, this.crnt, this.crnt.next);
+
+	// ì„ íƒí•œ ë…¸ë“œì˜ ë°”ë¡œ ë’¤ì— ë…¸ë“œë¥¼ ì‚½ì…
+	public void add(E data) {
+		Node<E> node = new Node<E>(data, this.crnt, this.crnt.next);
+
+		// ë”ë¯¸ ë…¸ë“œì˜ ë’¤ìª½ í¬ì¸í„°ì™€ ì•ìª½ í¬ì¸í„°ê°€ ê°€ë¦¬í‚¤ëŠ” ê³³ìœ¼ ë…¸ë“œ A ì´ë‹¤.
 		this.crnt.next = this.crnt.next.prev = node;
-		crnt = node;
+
+		this.crnt = node;
 	}
 
-	// ¸Ó¸®¿¡ ³ëµå¸¦ »ğÀÔ 
-	public void addFirst(E obj) {
-		this.crnt = this.head;				// ´õ¹Ì ³ëµå headÀÇ ¹Ù·Î µÚ¿¡ »ğÀÔ
-		add(obj);
+	// ë¨¸ë¦¬ì— ë…¸ë“œ ì‚½ì…
+	public void addFirst(E data) {
+		this.crnt = this.head;
+		add(data);
 	}
 
-	// ²¿¸®¿¡ ³ëµå¸¦ »ğÀÔ
-	public void addLast(E obj) {
-		this.crnt = this.head.prev;			// ²¿¸® ³ëµå head.prevÀÇ ¹Ù·Î µÚ¿¡ »ğÀÔ
-		add(obj);
+	// ê¼¬ë¦¬ì— ë…¸ë“œ ì‚½ì…
+	public void addLast(E data) {
+		this.crnt = this.head.prev;
+		add(data);
 	}
-
-	// ¼±ÅÃ ³ëµå¸¦ »èÁ¦
+	
+	
+	// ì„ íƒ ë…¸ë“œë¥¼ ì‚­ì œ
 	public void removeCurrentNode() {
-		if (!isEmpty()) {
+		if(!isEmpty()) {
 			this.crnt.prev.next = this.crnt.next;
 			this.crnt.next.prev = this.crnt.prev;
-			this.crnt = this.crnt.prev;		//Áú¹®
-			if (this.crnt == this.head) { 	//Áú¹®
+			this.crnt = this.crnt.prev;
+			
+			if(this.crnt == this.head) {
 				this.crnt = this.head.next;
 			}
 		}
 	}
-
-	// ³ëµå p¸¦ »èÁ¦
+	
+	// ë…¸ë“œ pë¥¼ ì‚­ì œ
 	public void remove(Node p) {
-		Node<E> ptr = head.next;
-
-		while (ptr != head) {
-			if (ptr == p) {					// p¸¦ Ã£À½
+		Node<E> ptr = this.head.next;
+		
+		// í•œë°”í€´ ëŒë•Œê¹Œì§€ while ëŒë ¤ ~
+		while(ptr != this.head) {
+			if(ptr == p) {
 				this.crnt = p;
 				removeCurrentNode();
 				break;
@@ -164,25 +128,35 @@ public class DLinkedList<E> {
 			ptr = ptr.next;
 		}
 	}
-
-	// ¸Ó¸® ³ëµå¸¦ »èÁ¦
+	
+	
+	// ë¨¸ë¦¬ ë…¸ë“œë¥¼ ì‚­ì œ
 	public void removeFirst() {
-		this.crnt = this.head.next;			// ¸Ó¸® ³ëµå head.next¸¦ »èÁ¦
+		this.crnt = this.head.next;
 		removeCurrentNode();
 	}
-
-	// ²¿¸® ³ëµå¸¦ »èÁ¦
+	
+	
+	// ê¼¬ë¦¬ ë…¸ë“œë¥¼ ì‚­ì œ
 	public void removeLast() {
-		this.crnt = this.head.prev;			// ²¿¸® ³ëµå head.prev¸¦ »èÁ¦
+		this.crnt = this.head.prev;
 		removeCurrentNode();
 	}
-
-	// ¸ğµç ³ëµå¸¦ »èÁ¦
+	
+	
+	// ëª¨ë“  ë…¸ë“œë¥¼ ì‚­ì œ
 	public void clear() {
-		while (!isEmpty())	{				// ÅÖ ºô ¶§±îÁö
-			removeFirst();					// ¸Ó¸® ³ëµå¸¦ »èÁ¦
+		while(!isEmpty()) {
+			removeCurrentNode();
 		}
 	}
-	
-	
 }
+
+
+
+
+
+
+
+
+

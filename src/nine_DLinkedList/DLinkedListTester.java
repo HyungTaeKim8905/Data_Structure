@@ -7,22 +7,22 @@ public class DLinkedListTester {
 		
 		Scanner scanner = new Scanner(System.in);
 		DLinkedList<Integer> Dlinkedlist = new DLinkedList<Integer>();
-		System.out.print("¸î°³ÀÇ µ¥ÀÌÅÍ¸¦ ÀúÁ¤ÇÏ½Ã°Ú½À´Ï±î? : ");
+		System.out.print("ï¿½î°³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï½Ã°Ú½ï¿½ï¿½Ï±ï¿½? : ");
 		int num = scanner.nextInt();
 		for(int i = 1; i <= num; i++) {
-			System.out.print("ÀúÀåÇÒ µ¥ÀÌÅÍ¸¦ ÀÔ·ÂÇÏ¼¼¿ä(¼ýÀÚ) : ");
+			System.out.print("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½) : ");
 			int data = scanner.nextInt();
 			Dlinkedlist.addLast(data);
 		}
-		System.out.println("ÀÌÁß ¿øÇü ¿¬°á¸®½ºÆ® Ãâ·Â");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½á¸®ï¿½ï¿½Æ® ï¿½ï¿½ï¿½");
 		Dlinkedlist.dump();
 		System.out.println();
-		System.out.println("ÀÌÁß ¿øÇü ¿¬°á¸®½ºÆ® °Å²Ù·Î Ãâ·Â");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½á¸®ï¿½ï¿½Æ® ï¿½Å²Ù·ï¿½ ï¿½ï¿½ï¿½");
 		Dlinkedlist.dumpReverse();
 		System.out.println();
-		System.out.print("°Ë»öÇÒ µ¥ÀÌÅÍ¸¦ ÀÔ·ÂÇÏ¼¼¿ä(¼ýÀÚ) : ");
+		System.out.print("ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½) : ");
 		int data = scanner.nextInt();
-		System.out.println("°Ë»öÇÑ µ¥ÀÌÅÍ´Â : " + Dlinkedlist.search(data) + " ÀÔ´Ï´Ù.");
+		System.out.println("ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í´ï¿½ : " + Dlinkedlist.search(data, null) + " ï¿½Ô´Ï´ï¿½.");
 		scanner.close();
 	}
 }
