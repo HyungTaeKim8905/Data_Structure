@@ -1,4 +1,4 @@
-package nine_Stack;
+package four_Stack;
 
 public class IntStack {
 	private int max;		//스택 용량	:: 스택에 쌓을 수 있는 최대 데이터 수
